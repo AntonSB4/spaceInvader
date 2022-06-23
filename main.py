@@ -1,6 +1,8 @@
 import pygame
 import random
 
+# Git commit
+
 # Initialize the pygame
 pygame.init()
 
