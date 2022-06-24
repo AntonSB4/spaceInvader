@@ -140,7 +140,7 @@ while running:
     for i in range(num_of_aliens):
 
         # Game over
-        if alienY[i] > 300:
+        if alienY[i] > 440:
             for j in range(num_of_aliens):
                 alienY[j] = 2000
             game_over_text()
