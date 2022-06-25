@@ -60,7 +60,7 @@ textX = 10
 textY = 10
 
 # Game over text
-font_over = pygame.font.Font('freesansbold.ttf', 104)
+font_over = pygame.font.Font('freesansbold.ttf', 64)
 
 
 def show_score(x, y):
@@ -127,8 +127,6 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
 
-    # 5 = 5 + -0.1 -> 5 = 5 - 0.1
-    #  5 = 5 + 0.1
     #  Checking for boundaries of spaceship so it doesn't out of bounds
     playerX += playerX_change
     if playerX <= 0:
