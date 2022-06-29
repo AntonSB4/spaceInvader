@@ -55,17 +55,45 @@ bullet_state = 'ready'
 
 # Score text
 score_value = 0
-font = pygame.font.Font('freesansbold.ttf', 54)
+font = pygame.font.Font('fonts/TitanOne-Regular.ttf', 54)
 textX = 10
 textY = 10
 
 # Game over text
-font_over = pygame.font.Font('freesansbold.ttf', 64)
+font_over = pygame.font.Font('fonts/TitanOne-Regular.ttf', 64)
 
 
 def show_score(x, y):
     score = font.render("Score: " + str(score_value), True, (255, 255, 255))
     screen.blit(score, (x, y))
+
+
+def pause_text(message, x, y, font_type='fonts/TitanOne-Regular.ttf', font_size=32, font_color=(255, 0, 0)):
+    font_type = pygame.font.Font(font_type, font_size)
+    text = font_type.render(message, True, font_color)
+    screen.blit(text, (x, y))
+
+
+def pause():
+    paused = True
+    while paused:
+        # RGB - Red, Green, Blue
+        screen.fill((0, 0, 0))
+        #  Background image
+        screen.blit(background, (0, 0))
+        global event
+        global running
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            pause_text('Paused. Press enter to continue', 130, 250)
+            #  if keystroke is pressed check whether its right or left
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    paused = False
+
+            pygame.display.update()
+
 
 
 def game_over_text():
@@ -112,6 +140,8 @@ while running:
 
     #  if keystroke is pressed check whether its right or left
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pause()
             if event.key == pygame.K_LEFT:
                 playerX_change = -0.7
             if event.key == pygame.K_RIGHT:
@@ -138,7 +168,7 @@ while running:
     for i in range(num_of_aliens):
 
         # Game over
-        if alienY[i] > 440:
+        if alienY[i] > 460:
             for j in range(num_of_aliens):
                 alienY[j] = 2000
             game_over_text()
